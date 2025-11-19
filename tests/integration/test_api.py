@@ -53,6 +53,12 @@ class TestAPIEndpoints:
         assert data["y"] == 2.0
         assert isinstance(data["distance"], float)
 
+    def test_add_endpoint(self):
+        """Test that the add endpoint returns the correct sum"""
+        response = client.get("/add/?x=10&y=20")
+        assert response.status_code == 200
+        assert response.json()["result"] == 30
+
     def test_invalid_route_returns_404(self):
         """Test that invalid routes return 404"""
         response = client.get("/this-route-does-not-exist")
